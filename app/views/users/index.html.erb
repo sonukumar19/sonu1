@@ -1,0 +1,37 @@
+<h1>Listing users</h1>
+
+<table border="1">
+  <thead>
+     <tr>
+  <th><%= sortable "name" %></th>
+  <th><%= sortable "date_of_birth" %></th>
+  <th><%= sortable "age" %></th>
+  <th><%= sortable "designation" %></th>
+  
+</tr>
+  </thead>
+ <%= form_tag("/search", method: "get") do %>
+  <%= label_tag(:q, "Search for:") %>
+  <%= text_field_tag(:q) %>
+  <%= submit_tag("Search") %>
+<% end %><br>
+<%= label_tag "Get Text" %>
+        <%= check_box_tag :send_text %><br>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.date_of_birth %></td>
+        <td><%= user.age %></td>
+        <td><%= user.designation %></td>
+        <td><%= link_to 'Show', user %></td>
+        <td><%= link_to 'Edit', edit_user_path(user) %></td>
+        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New User', new_user_path %>
